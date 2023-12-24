@@ -22,7 +22,6 @@ export default function Register() {
             return;
         }
         try {
-            console.log(role)
             const res = await fetch("/api/register", {
               method: "POST",
               headers: {
@@ -36,7 +35,6 @@ export default function Register() {
             });
       
             if (res.ok) {
-              const form = e.target;;
               router.push("/Customer");
             } else {
                 const data = await res.json();
