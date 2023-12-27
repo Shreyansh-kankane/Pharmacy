@@ -10,6 +10,7 @@ export default function Register() {
     const [role, setRole] = useState('customer');
     const [phone, setPhone] = useState('');
     const [address, setAddress] = useState('');
+    const [name, setName] = useState('');
 
     const [error, setError] = useState(null);
 
@@ -28,6 +29,7 @@ export default function Register() {
                 "Content-Type": "application/json",
               },
               body: JSON.stringify({
+                name,
                 email,
                 password,
                 role
@@ -53,6 +55,12 @@ export default function Register() {
 
 
             <form className='w-1/3 flex flex-col justify-between gap-1'>
+
+              <div className='w-full flex justify-between'>
+                  <label className=''>Name: </label>
+                  <input className='border border-black w-2/3' type="email" value={email} onChange={(e) => setName(e.target.value)} />
+                </div>
+
 
                 <div className='w-full flex justify-between'>
                   <label className=''>Email: </label>

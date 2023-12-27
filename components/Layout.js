@@ -2,9 +2,12 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { signIn,signOut,useSession } from 'next-auth/react'
+import { useRouter } from 'next/router';
 
 export default function Layout({children}) {
   const {data: session} = useSession();
+  const router = useRouter();
+
   return (
       <div className='w-[100vw]'>
         <Image className='w-full h-[50vh]' src={'/hioxindia-pharmacy_04.jpg'} height={1000} width={1000} />
@@ -26,11 +29,11 @@ export default function Layout({children}) {
                 session && session.user && session.user.role === 'distributor' 
                 && (
                   <>
-                    <Link href={'/Distributor'}><li>Home</li></Link>
-                    <Link href={'/store'}>Your store</Link>
-                    <Link href={'/order'}>Order medicine</Link>
-                    <Link href={'/sales'}>Sales</Link>
-                    <Link href={'/bills'}>Bills</Link>
+                    <Link href={'/Distributor'} className={`${router.pathname === '/Distributor' ? 'font-bold underline': '' }`} ><li >Home</li></Link>
+                    <Link href={'/Distributor/stock'} className={`${router.pathname === '/Distributor/stock' ? 'font-bold underline': '' }`} >Your Stock</Link>
+                    <Link href={'/Distributor/purchase'} className={`${router.pathname === '/Distributor/purchase' ? 'font-bold underline': '' }`} >Purchase medicine</Link>
+                    <Link href={'/Distributor/sales'} className={`${router.pathname === '/Distributor/sales' ? 'font-bold underline': '' }`} >Sales</Link>
+                    <Link href={'/Distributor/bills'} className={`${router.pathname === '/Distributor/bills' ? 'font-bold underline': '' }`} >Bills</Link>
                   </>
                 )
               }
@@ -43,8 +46,6 @@ export default function Layout({children}) {
                     <Link href={'/purchase'}>Shop</Link>
                     <Link href={'/cart'}>Cart</Link>
                     <Link href={'/order'}>Order</Link>
-                    <Link href={'/bills'}>Bills</Link>
-
                   </>
                 )
               }
@@ -56,7 +57,7 @@ export default function Layout({children}) {
                 </>
               )}
 
-              {session && session.user && <button onClick={()=>signOut()}>Sign Out</button>}
+              {session && session.user && <button className='text-white bg-sky-600 font-bold ' onClick={()=>signOut()}>Sign Out</button>}
               {/* {!session && <button onClick={()=>signIn()}>SignIn</button>} */}
             </ul>
         </div>

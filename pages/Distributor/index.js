@@ -13,7 +13,7 @@ function Distributor() {
     },[]);
 
   return (
-    <div>Distributor</div>
+    <div className="text-3xl text-center mt-4">Welcome to your medical store</div>  
   )
 }
 

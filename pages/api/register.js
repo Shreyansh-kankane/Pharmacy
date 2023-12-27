@@ -5,7 +5,7 @@ export default async function handler(req, res) {
     return res.status(405).end(); // Method Not Allowed
   }
 
-  const { email, password, role } = req.body;
+  const {name, email, password, role } = req.body;
 
   if (!email || !password) {
     return res.status(400).json({ error: 'email and password are required' });
@@ -22,6 +22,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'User already exists' });
     }
     const newUser = await users.insertOne({
+      name,
       email,
       password, 
       role
