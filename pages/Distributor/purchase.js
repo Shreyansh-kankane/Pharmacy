@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
-import PurchaseItem from './PurchaseItem';
+import PurchaseItem from '../../components/PurchaseItem';
 
 function purchase() {
 
@@ -37,4 +37,4 @@ function purchase() {
     );
 }
 
-export default purchase
+export default purchase;
