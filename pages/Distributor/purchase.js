@@ -21,6 +21,8 @@ function purchase() {
             alert('Please enter a valid quantity');
             return;
         } 
+        console.log(medicine, quantity);
+        alert('Purchase Successful');
     };
 
     return (
