@@ -10,7 +10,7 @@ export default function Layout({children}) {
 
   return (
       <div className='w-[100vw]'>
-        <Image className='w-full h-[50vh]' src={'/hioxindia-pharmacy_04.jpg'} height={1000} width={1000} />
+        <Image className='w-full h-[50vh]' src={'/hioxindia-pharmacy_04.jpg'} height={1000} width={1000} alt='medical_shop' />
 
         <div className='w-[1/2] capitalize text-sky-700'>
             <ul className='w-full flex justify-around mt-[-30px]'>
@@ -43,9 +43,9 @@ export default function Layout({children}) {
                 && (
                   <>
                     <Link href={'/Customer'}><li>Home</li></Link>
-                    <Link href={'/purchase'}>Shop</Link>
-                    <Link href={'/cart'}>Cart</Link>
-                    <Link href={'/order'}>Order</Link>
+                    <Link href={'/Customer/shop'}>Shop</Link>
+                    <Link href={'/Customer/cart'}>Cart</Link>
+                    <Link href={'/Customer/order'}>Order</Link>
                   </>
                 )
               }
@@ -68,13 +68,13 @@ export default function Layout({children}) {
 
         <div className='flex flex-wrap justify-center gap-5 mt-10 '>
           <div className='w-[30%]'>
-            <Image className='w-[350px]' src={'/hioxindia-pharmacy_08.jpg'} height={200} width={1000} />
+            <Image className='w-[350px]' src={'/hioxindia-pharmacy_08.jpg'} height={200} width={1000} alt='Paracetamol'/>
           </div>
           <div className='w-[30%]'>
-            <Image className='w-[350px]' src={'/hioxindia-pharmacy_10.jpg'} height={200} width={1000} />
+            <Image className='w-[350px]' src={'/hioxindia-pharmacy_10.jpg'} height={200} width={1000} alt='Aspirin'/>
           </div>
           <div className='w-[30%]'>
-            <Image className='w-[350px]' src={'/hioxindia-pharmacy_12.jpg'} height={200} width={1000} />
+            <Image className='w-[350px]' src={'/hioxindia-pharmacy_12.jpg'} height={200} width={1000} alt='Cetrizine' />
           </div>
         </div>
       </div>

@@ -55,8 +55,8 @@ const Stock = () => {
         quantity: 60,
         supplierName: 'Bhopal Medicals Pvt. Ltd.',
         stackNo: 'E5'
-            },
-    ];
+    },
+];
 
     const [searchTerm, setSearchTerm] = useState('');
     const [filterMedicine,setFilterMedicine] = useState(medicines);

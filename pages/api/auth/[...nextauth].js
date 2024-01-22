@@ -29,6 +29,7 @@ export const authOptions = {
             if (user){
                 token.id = user.id;
                 token.role = user.role; // Set role as returned from user.role from mongo database
+                token.address = user.address;
             }
             return token;
         },
@@ -36,6 +37,7 @@ export const authOptions = {
         async session({ session, token }) {
             session.user.id = token.id;
             session.user.role = token.role; // Set role as returned from user.role from mongo database
+            session.user.address = token.address;
             return session;
         },
     },

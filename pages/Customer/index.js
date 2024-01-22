@@ -11,11 +11,12 @@ export default function Customer() {
         if(!session){
             router.push('/login');
         }
+        console.log(session);
     },[]);
 
     return (
-        <div className="">
-            hii customer
+        <div className="font-bold text-center mt-4 text-4xl">
+            Welcome {session?.user?.name}
         </div>
     );
 }
