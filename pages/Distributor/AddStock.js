@@ -24,7 +24,7 @@ const MedicineForm = () => {
   };
 
   const addMedicine = () => {
-    fetch('http://localhost:3000/api/MedicineStock', {
+    fetch('/api/MedicineStock', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
