@@ -3,7 +3,7 @@ import connectToDatabase from "@/utils/db";
 export default async function handler(req, res) {
 
     if(req.method === 'POST') {
-        const medicine = req.body;
+        const {medicine,distributorId} = req.body;
         const db = await connectToDatabase(process.env.MONGODB_URI);
         const medicineCollection = db.collection('medicine_stock');
 
@@ -28,11 +28,11 @@ export default async function handler(req, res) {
 
             } else {
 
-                if(medicine.name=='' || medicine.price=='' || medicine.batchNo=='' || medicine.expiryDate=='' || medicine.quantity=='' || medicine.stackNo==''){
+                if(medicine.name=='' || medicine.price=='' || medicine.batchNo=='' || medicine.expiryDate=='' || medicine.quantity=='' || medicine.stackNo=='' ){
                     return res.status(400).json({message: "Please fill all the fields"});   
                 }
 
-
+                medicine.distributorId = distributorId;
                 const result = await medicineCollection.insertOne(medicine);
                 console.log('added medicine ', result);
                 return res.status(200).json({success: true,message: "Medicine added successfully"});

@@ -15,7 +15,6 @@ const MedicineForm = () => {
     expiryDate: '',
     quantity: '',
     stackNo: '',
-    distributorId: session?.user?.id,
   });
 
   const handleChange = (e) => {
@@ -29,7 +28,7 @@ const MedicineForm = () => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(medicine),
+      body: JSON.stringify({ medicine:medicine , distributorId: session?.user.id }),
     })
       .then((response) => response.json())
       .then((data) => {
