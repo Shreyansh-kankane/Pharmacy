@@ -2,7 +2,7 @@ import connectToDatabase from "@/utils/db";
 
 export default async function fetchMedicines(req, res) {
     try {
-        const db = await connectToDatabase(process.env.MONGoDB_URI);
+        const db = await connectToDatabase(process.env.MONGODB_URI);
         const medicineCollection = db.collection('medicine_stock');
 
         const medicines = await medicineCollection.find({}).toArray();

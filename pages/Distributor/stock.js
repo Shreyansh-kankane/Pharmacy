@@ -93,25 +93,6 @@ const Stock = () => {
     );
 };
 
-// export async function getServerSideProps() {
-//     try {
-//       const response = await fetch(`${process.env.NEXTAUTH_URL}/api/MedicineStock`);
-//       const { medicines } = await response.json();
-//       return {
-//         props: {
-//           medicines: medicines,
-//         },
-//       };
-//     } catch (error) {
-//       console.error('Error fetching medicine on the server', error);
-//       return {
-//         props: {
-//           medicines: [],
-//         },
-//       };
-//     }
-//   }
-
 export default Stock;
 
 

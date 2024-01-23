@@ -1,6 +1,5 @@
 import React from 'react';
 import AddToCartButton from '@/components/AddToCartButton';
-import { useCart } from '@/context/cartContextProvider';
 
 function Shop({ medicines }) {
 

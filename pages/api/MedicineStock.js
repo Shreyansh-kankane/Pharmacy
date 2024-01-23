@@ -4,7 +4,7 @@ export default async function handler(req, res) {
 
     if(req.method === 'POST') {
         const medicine = req.body;
-        const db = await connectToDatabase(process.env.MONGoDB_URI);
+        const db = await connectToDatabase(process.env.MONGODB_URI);
         const medicineCollection = db.collection('medicine_stock');
 
         try {
@@ -47,7 +47,7 @@ export default async function handler(req, res) {
         try {
             const distributorId = req.query.distributorId;
 
-            const db = await connectToDatabase(process.env.MONGoDB_URI);
+            const db = await connectToDatabase(process.env.MONGODB_URI);
             const medicineCollection = db.collection('medicine_stock');
 
             const medicines = await medicineCollection.find({distributorId:distributorId}).toArray();
