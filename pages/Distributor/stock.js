@@ -1,65 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
+import getUser from '@/utils/getUser';
 
 const Stock = () => {
-    const medicines = [
-    {
-        name: 'Paracetamol',
-        price: 10,
-        batchNo: '12345',
-        expiryDate: '2022-12-31',
-        quantity: 100,
-        supplierName: 'Rohan Medicals Pvt. Ltd.',
-        stackNo: 'A1'
-    },
-    {
-        name: 'Aspirin',
-        price: 15,
-        batchNo: '67890',
-        expiryDate: '2023-06-30',
-        quantity: 50,
-        supplierName: 'Dvwedi Medicals Pvt. Ltd.',
-        stackNo: 'B2'
-    },
-    {
-        name: 'Cetrizine',
-        price: 20,
-        batchNo: '24680',
-        expiryDate: '2023-12-31',
-        quantity: 75,
-        supplierName: 'Triphati Medicals',
-        stackNo: 'C3'
-    },
-    {
-        name: 'Cough Syrup',
-        price: 30,
-        batchNo: '13579',
-        expiryDate: '2024-06-30',
-        quantity: 25,
-        supplierName: 'Lucknow Pharmacy store ',
-        stackNo: 'D4'
-    },
-    {
-        name: 'Vitamin C',
-        price: 25,
-        batchNo: '24680',
-        expiryDate: '2024-12-31',
-        quantity: 60,
-        supplierName: 'Bhopal Medicals Pvt. Ltd.',
-        stackNo: 'E5'
-    },
-    {
-        name: 'Vitamin D',
-        price: 25,
-        batchNo: '24680',
-        expiryDate: '2024-12-31',
-        quantity: 60,
-        supplierName: 'Bhopal Medicals Pvt. Ltd.',
-        stackNo: 'E5'
-    },
-];
-
+    const user = getUser();
     const [searchTerm, setSearchTerm] = useState('');
-    const [filterMedicine,setFilterMedicine] = useState(medicines);
+    const [filterMedicine,setFilterMedicine] = useState([]);
+    const [medicines, setMedicine] = useState([]);
+
+    const fetchMedicines = async (id) => {
+        const res = await fetch(`/api/MedicineStock/?distributorId=${id}`);
+        const data = await res.json();
+    
+        setMedicine(data.medicines);
+        setFilterMedicine(data.medicines);
+    }
+
+    useEffect(() => {
+        if(user){
+            fetchMedicines(user.id);
+        }
+    },[user])
+
+
 
     const handleSearchInput = (event) => {
         setSearchTerm(event.target.value);
@@ -70,17 +32,20 @@ const Stock = () => {
 
     function handleFilterMedicine(term){
         const filter = medicines.filter((medicine) => {
-            const { name, batchNo, supplierName, stackNo } = medicine;
+            const { name, batchNo, stackNo } = medicine;
             const searchValue = term.toLowerCase();
             return (
                 name.toLowerCase().includes(searchValue) ||
                 batchNo.toLowerCase().includes(searchValue) ||
-                supplierName.toLowerCase().includes(searchValue) ||
                 stackNo.toLowerCase().includes(searchValue)
             );
         });
         console.log(filter);
         return filter;
+    }
+
+    if( filterMedicine.length == 0){
+        return <h1 className='text-3xl font-bold text-center mt-4'>No Medicines in Stock</h1>
     }
     
     return (
@@ -91,7 +56,7 @@ const Stock = () => {
                 <h1>Search: </h1>
                 <input
                     type='text'
-                    placeholder='Search by name, batch no, supplier name, stack no'
+                    placeholder='Search by name, batch no, stack no'
                     value={searchTerm}
                     onChange={handleSearchInput}
                     className='my-4 px-2 py-1 border border-gray-300 rounded w-1/2'
@@ -107,7 +72,6 @@ const Stock = () => {
                          <th style={{ border: '1px solid black' }}>Batch No</th>
                          <th style={{ border: '1px solid black' }}>Expiry Date</th>
                          <th style={{ border: '1px solid black' }}>Quantity</th>
-                         <th style={{ border: '1px solid black' }}>Supplier Name</th>
                          <th style={{ border: '1px solid black' }}>Stack No</th>
                      </tr>
                  </thead>
@@ -119,7 +83,6 @@ const Stock = () => {
                             <td style={{ border: '1px solid black' }} className="text-center">{medicine.batchNo}</td>
                             <td style={{ border: '1px solid black' }} className="text-center">{medicine.expiryDate}</td>
                             <td style={{ border: '1px solid black' }} className="text-center">{medicine.quantity}</td>
-                            <td style={{ border: '1px solid black' }} className="text-center">{medicine.supplierName}</td>
                             <td style={{ border: '1px solid black' }} className="text-center">{medicine.stackNo}</td>
                         </tr>
                     ))}
@@ -130,4 +93,25 @@ const Stock = () => {
     );
 };
 
+// export async function getServerSideProps() {
+//     try {
+//       const response = await fetch(`${process.env.NEXTAUTH_URL}/api/MedicineStock`);
+//       const { medicines } = await response.json();
+//       return {
+//         props: {
+//           medicines: medicines,
+//         },
+//       };
+//     } catch (error) {
+//       console.error('Error fetching medicine on the server', error);
+//       return {
+//         props: {
+//           medicines: [],
+//         },
+//       };
+//     }
+//   }
+
 export default Stock;
+
+

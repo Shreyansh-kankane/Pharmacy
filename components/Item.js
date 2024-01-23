@@ -14,11 +14,17 @@ function Item({item}) {
             });
         }
         else {
-            setQuantity(value);
-            dispatch({
-                type: 'UPDATE_QUANTITY',
-                payload: { ...item, quantity: value },
-            });
+
+            if(value > item.quantity) {
+                alert('Quantity not available');
+            }
+            else {
+                setQuantity(value);
+                dispatch({
+                    type: 'UPDATE_QUANTITY',
+                    payload: { ...item, quantity: value },
+                });
+            }
         }
         
         return;
@@ -29,7 +35,10 @@ function Item({item}) {
         <div className='flex-1'>
             <h2 className="text-xl font-semibold mb-2">{item.name}</h2>
             <p className="text-gray-700 mb-2">
-                <strong>Price:</strong> ${item.price}
+                <strong>Price:</strong> ₹{item.price}
+            </p>
+            <p className="text-gray-700 mb-2">
+                <strong>Max:</strong> {item.quantity}
             </p>
             <div className='flex justify-between'>
                 <p className="text-gray-700">
@@ -48,7 +57,7 @@ function Item({item}) {
                     <strong>Total:</strong> 
                 </p>
                 <p className="text-gray-700">
-                    <strong>${item.price * (quantity ? quantity: 1)}</strong>
+                    <strong>₹ {item.price * (quantity ? quantity: 1)}</strong>
                 </p>
             </div>
         </div>

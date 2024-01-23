@@ -15,10 +15,7 @@ export default function LoginPage() {
     const router = useRouter();
     
     if(session){
-        if(session.user.role === 'supplier'){
-            router.push('/Supplier');
-        }
-        else if(session.user.role === 'customer'){
+        if(session.user.role === 'customer'){
             router.push('/Customer');
         }
         else if(session.user.role === 'distributor'){
@@ -39,10 +36,7 @@ export default function LoginPage() {
             setError(result.error);   
         }
         else if(result.ok){
-            if(role === 'supplier'){
-                router.push('/Supplier');
-            }
-            else if(role === 'customer'){
+            if(role === 'customer'){
                 router.push('/Customer');
             }
             else if(role === 'distributor'){
@@ -76,7 +70,6 @@ export default function LoginPage() {
                     <select value={role} onChange={(e) => setRole(e.target.value)} className='border border-black' >
                         <option value="customer">Customer</option>
                         <option value="distributor">Distributor</option> 
-                        <option value="supplier">Supplier</option> 
                     </select> 
                 </div>
 

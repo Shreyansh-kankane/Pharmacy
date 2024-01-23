@@ -3,14 +3,33 @@ import { useCart } from '@/context/cartContextProvider';
 import Item from '@/components/Item';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
+import getUser from '@/utils/getUser';
 
 function Cart() {
   const { cartState,dispatch} = useCart();
+  const user = getUser();
+  console.log(user);
   const router = useRouter();   
   const handleCheckout = () => {
-    toast.success('Checkout success!');
-    
-    router.push('/Customer/order')
+    dispatch({type:'CHECKOUT'});
+    fetch('/api/orderHandler',{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({cart: cartState,client:user}),
+    }).then((response) => {
+      if(response.ok){
+        toast.success('Order Placed Successfully');
+        router.push('/Customer/order');
+      }
+      else{
+        toast.error('Error in placing order');
+      }
+    }).catch((error) => {
+      console.error('Error:', error);
+      toast.error('Error in placing order');
+    })
     return;
   }
 
@@ -26,7 +45,7 @@ function Cart() {
             <Item key={item._id} item={item}/>
           ))}
           <p className="text-lg font-semibold mt-4 text-end">
-            Total: ${cartState.total}
+            Total: ₹{cartState.total}
           </p>
           <div className='flex justify-end mt-4'>
             <button className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-700"

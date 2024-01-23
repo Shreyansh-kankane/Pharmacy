@@ -12,7 +12,7 @@ function Shop({ medicines }) {
           <div key={medicine._id} className="bg-white p-6 rounded-md shadow-md">
             <h2 className="text-xl font-semibold mb-2">{medicine.name}</h2>
             <p className="text-gray-700 mb-2">
-              <strong>Price:</strong> ${medicine.price}
+              <strong>Price:</strong> ₹ {medicine.price}
             </p>
             <p className="text-gray-700 mb-2">
               <strong>Batch Number:</strong> {medicine.batchNo}
@@ -34,10 +34,10 @@ function Shop({ medicines }) {
 }
 
 export async function getServerSideProps() {
-  // Fetch data from your API or database
   try {
-    const response = await fetch('http://localhost:3000/api/fetchMedicine');
+    const response = await fetch(`${process.env.NEXTAUTH_URL}/api/fetchMedicines`);
     const { medicines } = await response.json();
+
     return {
       props: {
         medicines: medicines,

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import {  useRef } from "react";
 import ClientDetails from "@/components/ClientDetails";
 import Dates from "@/components/Dates";
 import Footer from "@/components/Footer";
@@ -7,15 +7,17 @@ import MainDetails from "@/components/MainDetails";
 import Table from "@/components/Table";
 import ReactToPrint from "react-to-print";
 import { useCart } from "@/context/cartContextProvider";
-import { useRouter } from "next/router";
+
 
 function App() {
     const componentRef = useRef();
     const { cartState } = useCart();
-    const router = useRouter();
 
     if(cartState.items.length === 0){
         return <div className="text-center text-3xl mt-2 font-bold"> No order found</div>
+    }
+    if(cartState.checkedOut=== false){
+        return <div className="text-center text-3xl mt-2 font-bold"> Order not checked out</div>
     }
 
   return (

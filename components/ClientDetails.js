@@ -1,14 +1,14 @@
-import { useSession } from "next-auth/react";
+import getUser from "@/utils/getUser";
 
 export default function ClientDetails() {
-    const {data:session} = useSession();
-    console.log(session);
+  const user = getUser();
 
   return (
     <>
       <section className="mt-10">
-        <h2 className="text-2xl uppercase font-bold mb-1">{session?.user?.name}</h2>
-        <p>{session?.user.address}</p>
+        <h2 className="text-2xl uppercase font-bold mb-1">{user?.name}</h2>
+        <p>{user.address}</p>
+        <p>{user.phone}</p>
       </section>
     </>
   );

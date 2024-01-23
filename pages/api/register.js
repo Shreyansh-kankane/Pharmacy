@@ -5,7 +5,7 @@ export default async function handler(req, res) {
     return res.status(405).end(); // Method Not Allowed
   }
 
-  const {name, email, password, role } = req.body;
+  const {name, email, password, role, address, phone } = req.body;
 
   if (!email || !password) {
     return res.status(400).json({ error: 'email and password are required' });
@@ -25,7 +25,9 @@ export default async function handler(req, res) {
       name,
       email,
       password, 
-      role
+      role,
+      phone,
+      address
     });
 
     return res.status(200).json({ message: 'User registered successfully', user: newUser });

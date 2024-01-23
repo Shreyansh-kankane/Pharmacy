@@ -19,7 +19,7 @@ function Invoice({ purchasedItems }) {
         {purchasedItems.map((item) => (
           <div key={item.batchNo} className="item">
             <p>Name: {item.name}</p>
-            <p>Price: ${item.price}</p>
+            <p>Price: ₹ {item.price}</p>
             <p>Quantity: {item.quantity}</p>
         
           </div>

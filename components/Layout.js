@@ -31,9 +31,8 @@ export default function Layout({children}) {
                   <>
                     <Link href={'/Distributor'} className={`${router.pathname === '/Distributor' ? 'font-bold underline': '' }`} ><li >Home</li></Link>
                     <Link href={'/Distributor/stock'} className={`${router.pathname === '/Distributor/stock' ? 'font-bold underline': '' }`} >Your Stock</Link>
-                    <Link href={'/Distributor/purchase'} className={`${router.pathname === '/Distributor/purchase' ? 'font-bold underline': '' }`} >Purchase medicine</Link>
+                    <Link href={'/Distributor/AddStock'} className={`${router.pathname === '/Distributor/AddStock' ? 'font-bold underline': '' }`} >Add Stock</Link>
                     <Link href={'/Distributor/sales'} className={`${router.pathname === '/Distributor/sales' ? 'font-bold underline': '' }`} >Sales</Link>
-                    <Link href={'/Distributor/bills'} className={`${router.pathname === '/Distributor/bills' ? 'font-bold underline': '' }`} >Bills</Link>
                   </>
                 )
               }

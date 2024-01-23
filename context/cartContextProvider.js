@@ -2,7 +2,8 @@ import React, { createContext, useReducer, useContext } from 'react';
 
 const initialCartState = {
   items: [],
-  total: 0
+  total: 0,
+  checkedOut: false,
 };
 
 const CartContext = createContext();
@@ -39,9 +40,12 @@ const cartReducer = (state, action) => {
         total: state.items.reduce((acc,item)=>item._id === action.payload._id ? acc += item.price * action.payload.quantity : acc += item.price * item.buy,0)
       };
 
-
-
-
+    case 'CHECKOUT':
+      return {
+        ...state,
+        checkedOut: true,
+      };
+      
     default:
       return state;
   }

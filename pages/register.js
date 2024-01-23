@@ -4,7 +4,6 @@ import { useRouter } from 'next/navigation';
 export default function Register() {
 
     const router = useRouter();
-
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [role, setRole] = useState('customer');
@@ -32,7 +31,9 @@ export default function Register() {
                 name,
                 email,
                 password,
-                role
+                role,
+                phone,
+                address
               }),
             });
       
@@ -58,7 +59,7 @@ export default function Register() {
 
               <div className='w-full flex justify-between'>
                   <label className=''>Name: </label>
-                  <input className='border border-black w-2/3' type="email" value={email} onChange={(e) => setName(e.target.value)} />
+                  <input className='border border-black w-2/3' type="email" value={name} onChange={(e) => setName(e.target.value)} />
                 </div>
 
 
@@ -87,7 +88,6 @@ export default function Register() {
                   <select value={role} onChange={(e) => setRole(e.target.value)} className='border border-black' >
                       <option value="customer">Customer</option>
                       <option value="distributor">Distributor</option>  
-                      <option value="supplier">Supplier</option>
                   </select> 
                 </div>
 

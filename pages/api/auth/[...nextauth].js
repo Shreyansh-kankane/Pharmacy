@@ -27,9 +27,10 @@ export const authOptions = {
     callbacks: {
         async jwt({ token, user }) {
             if (user){
-                token.id = user.id;
+                token.id = user._id;
                 token.role = user.role; // Set role as returned from user.role from mongo database
                 token.address = user.address;
+                token.phone = user.phone;
             }
             return token;
         },
@@ -38,8 +39,10 @@ export const authOptions = {
             session.user.id = token.id;
             session.user.role = token.role; // Set role as returned from user.role from mongo database
             session.user.address = token.address;
+            session.user.phone = token.phone;
             return session;
         },
+
     },
     pages:{
         signIn: '/login',
